@@ -39,7 +39,7 @@ class BooksPage extends React.Component {
   }
 
   onClickSave() {
-    this.props.dispatch(booksActions.createBook(this.state.book));
+    this.props.createBook(this.state.book);
   }
 
   bookRow(book, index) {
@@ -101,8 +101,8 @@ class BooksPage extends React.Component {
 }
 
 BooksPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  books: PropTypes.array.isRequired
+  books: PropTypes.array.isRequired,
+  createBook: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -111,4 +111,10 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(BooksPage);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createBook: book => dispatch(booksActions.createBook(book))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BooksPage);
