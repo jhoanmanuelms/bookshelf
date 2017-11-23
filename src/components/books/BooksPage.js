@@ -6,44 +6,9 @@ import * as booksActions from '../../actions/bookAction';
 class BooksPage extends React.Component {
   constructor(props, context) {
     super(props, context);
-
-    this.state = {
-      book: {
-        title: '',
-        author: '',
-        genre: ''
-      }
-    };
-
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onAuthorChange = this.onAuthorChange.bind(this);
-    this.onGenreChange = this.onGenreChange.bind(this);
-    this.onClickSave = this.onClickSave.bind(this);
   }
 
-  onTitleChange(event) {
-    const book = this.state.book;
-    book.title = event.target.value;
-    this.setState({book: book});
-  }
-
-  onAuthorChange(event) {
-    const book = this.state.book;
-    book.author = event.target.value;
-    this.setState({book: book});
-  }
-
-  onGenreChange(event) {
-    const book = this.state.book;
-    book.genre = event.target.value;
-    this.setState({book: book});
-  }
-
-  onClickSave() {
-    this.props.actions.createBook(this.state.book);
-  }
-
-  bookRow(book, index) {
+  renderBookRow(book, index) {
     return (
       <tr key={index}>
         <td>{book.title}</td>
@@ -66,36 +31,9 @@ class BooksPage extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.books.map(this.bookRow)}
+            {this.props.books.map(this.renderBookRow)}
           </tbody>
         </table>
-        <h2>Add Book</h2>
-
-        Title: 
-        <input
-          type = "text"
-          onChange = {this.onTitleChange}
-          value = {this.state.book.title} />
-        <br /><br />
-
-        Author: 
-        <input
-          type = "text"
-          onChange = {this.onAuthorChange}
-          value = {this.state.book.author} />
-        <br /><br />
-
-        Genre: 
-        <input
-          type = "text"
-          onChange = {this.onGenreChange}
-          value = {this.state.book.genre} />
-        <br /><br />
-
-        <input
-          type = "submit"
-          value = "Save"
-          onClick = {this.onClickSave} />
       </div>
     );
   }
